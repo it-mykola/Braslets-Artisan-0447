@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Brand colors */
+  --color-peach: #F4C2C2;
+  --color-dusty-rose: #C08081;
+  --color-blush: #FFF5F5;
+  --color-charcoal: #2D3142;
+  --color-warm-gray: #8B7E74;
+  --color-silver: #C0C0C0;
+  --color-midnight: #1A1A2E;
+  --color-mint: #88D8B0;
+
+  --font-playfair: 'Playfair Display', Georgia, serif;
+  --font-montserrat: 'Montserrat', sans-serif;
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: #FFF5F5;
+  --foreground: #2D3142;
+  --card: #ffffff;
+  --card-foreground: #2D3142;
+  --popover: #ffffff;
+  --popover-foreground: #2D3142;
+  --primary: #2D3142;
+  --primary-foreground: #ffffff;
+  --secondary: #F4C2C2;
+  --secondary-foreground: #2D3142;
+  --muted: #F9F0F0;
+  --muted-foreground: #8B7E74;
+  --accent: #F4C2C2;
+  --accent-foreground: #2D3142;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #EDE0E0;
+  --input: #EDE0E0;
+  --ring: #C08081;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    box-sizing: border-box;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Montserrat', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes heartPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, #f0e0e0 25%, #fafafa 50%, #f0e0e0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.3s ease forwards;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* Product card hover */
+.product-card {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(44, 49, 66, 0.12);
+}
+
+.product-card .card-actions {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.product-card:hover .card-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.product-card .product-img-secondary {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.product-card:hover .product-img-primary {
+  opacity: 0;
+}
+
+.product-card:hover .product-img-secondary {
+  opacity: 1;
+}
+
+/* Cart drawer */
+.cart-overlay {
+  background: rgba(44, 49, 66, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #FFF5F5; }
+::-webkit-scrollbar-thumb { background: #F4C2C2; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #C08081; }
+
+/* Nav transparency */
+.nav-transparent {
+  background: transparent;
+  border-color: transparent;
+}
+.nav-solid {
+  background: rgba(255, 245, 245, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #EDE0E0;
+  box-shadow: 0 2px 20px rgba(44, 49, 66, 0.06);
+}
+
+/* Category pill active */
+.cat-pill {
+  transition: all 0.2s ease;
+}
+.cat-pill.active {
+  background: #2D3142;
+  color: #ffffff;
+}
+.cat-pill:not(.active):hover {
+  background: #F4C2C2;
+  color: #2D3142;
+}
+
+/* Image zoom container */
+.img-zoom-container {
+  overflow: hidden;
+}
+.img-zoom-container img {
+  transition: transform 0.4s ease;
+}
+.img-zoom-container:hover img {
+  transform: scale(1.08);
+}
